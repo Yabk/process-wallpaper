@@ -4,10 +4,12 @@ import re
 from PIL import Image
 from wordcloud import WordCloud
 import json
+import os
 
 commandList = []
+project_dir = os.path.dirname(os.path.abspath(__file__))
 
-with open("top.out", "r") as topFile:
+with open(project_dir+"/top.out", "r") as topFile:
     topOutput = topFile.read().split("\n")[7:]
     
     for line in topOutput[:-1]:
@@ -40,7 +42,7 @@ resourceDict = {}
 for command, [cpu, mem] in commandDict.items():
     resourceDict[command] = (cpu ** 2 + mem ** 2) ** 0.5
 
-configJSON = json.loads(open("config.json", "r").read())
+configJSON = json.loads(open(project_dir+"/config.json", "r").read())
 
 wc = WordCloud(
     background_color = configJSON["wordcloud"]["background"],
@@ -48,9 +50,9 @@ wc = WordCloud(
     height = int(configJSON["resolution"]["height"] - 2 * configJSON["wordcloud"]["margin"])
 ).generate_from_frequencies(resourceDict)
 
-wc.to_file('wc.png')
+wc.to_file(project_dir+'/wc.png')
 
-wordcloud = Image.open("wc.png")
+wordcloud = Image.open(project_dir+"/wc.png")
 wallpaper = Image.new('RGB', (configJSON["resolution"]["width"], configJSON["resolution"]["height"]), configJSON["wordcloud"]["background"])
 wallpaper.paste(
     wordcloud, 
@@ -59,4 +61,4 @@ wallpaper.paste(
         configJSON["wordcloud"]["margin"]
     )    
 )
-wallpaper.save("wallpaper.png")
+wallpaper.save(project_dir+"/wallpaper.png")
