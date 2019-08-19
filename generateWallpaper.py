@@ -5,6 +5,7 @@ from PIL import Image
 from wordcloud import WordCloud
 import json
 import os
+import numpy as np
 
 commandList = []
 project_dir = os.path.dirname(os.path.abspath(__file__))
@@ -44,8 +45,10 @@ for command, [cpu, mem] in commandDict.items():
 
 configJSON = json.loads(open(project_dir+"/config.json", "r").read())
 
+arch_mask = np.array(Image.open(project_dir+"/arch.jpg"))
 wc = WordCloud(
     background_color = configJSON["wordcloud"]["background"],
+    mask = arch_mask,
     width = int(configJSON["resolution"]["width"] - 2 * configJSON["wordcloud"]["margin"]),
     height = int(configJSON["resolution"]["height"] - 2 * configJSON["wordcloud"]["margin"])
 ).generate_from_frequencies(resourceDict)
