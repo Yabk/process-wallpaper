@@ -12,7 +12,7 @@ Works only on sway!
 
 ## Use
 ### Cron
-The wallpaper is updated every time `updateWallpaper.sh` is run. To trigger the update every minute, append the following line to `crontab -e`:
+The wallpaper is updated every time `updateWallpaper.sh` is run. To trigger the update every 15 minutes, append the following line to `crontab -e`:
 ```
 */15 * * * * /usr/bin/bash /path/to/script/directory/updateWallpaper.sh
 
