@@ -1,0 +1,8 @@
+[Unit]
+Description=Runs wallpaper service every 15 minutes
+
+[Timer]
+OnUnitActiveSec=15min
+
+[Install]
+WantedBy=multi-user.target

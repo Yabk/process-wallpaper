@@ -1,0 +1,5 @@
+[Unit]
+Description=Wallpaper service
+
+[Service]
+ExecStart=/usr/bin/bash /path-to-repo/process-wallpaper/updateWallpaper.sh
