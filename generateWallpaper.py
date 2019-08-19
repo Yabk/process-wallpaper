@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import re
 from PIL import Image
 from wordcloud import WordCloud
